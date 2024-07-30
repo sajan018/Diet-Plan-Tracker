@@ -7,17 +7,13 @@ const authRoutes = require('./routes/auth');
 
 const app = express();
 
-// Middleware to parse JSON
 app.use(express.json());
-
-// Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../client/public')));
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/public/index.html'));
 });
 
-// Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
